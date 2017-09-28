@@ -1,21 +1,19 @@
 package hivolts;
 import java.awt.*;
 
-public class Fence {
-	public final int width = 100;
-	public final int height = 100;
-	private double x;
-	private double y;
+public class Fence extends Square{
+	public final int width = 50;
+	public final int height = 50;
 	private final Color color = Color.ORANGE;
 	
-	public Fence(double x, double y){
+	public Fence(int x, int y){
 		this.x = x;
 		this.y = height;
 		
 	}
 	public void draw (Graphics g){
 		g.setColor(this.color);
-		g.fillRect((int)x, (int)y, (int)width, (int)height);
+		g.fillRect(x, y, width, height);
 	}
 	
 }

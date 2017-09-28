@@ -9,6 +9,7 @@ public class HiVolts extends JApplet{
 	public final int height = 1440;
 	public Fence[] fenceBorder = new Fence[44];
 	public Fence[] randomFences = new Fence[20];
+	
 	public HiVolts(){
 		init();
 	}

@@ -2,8 +2,7 @@ package hivolts;
 
 import java.awt.*;
 
-public class Mho {
-	private int x, y;
+public class Mho extends Square{
 	public Mho(int x, int y) {
 		this.x = x;
 		this.y = y;
