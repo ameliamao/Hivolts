@@ -7,6 +7,8 @@ public abstract class Square {
 	int xCoordinate;
 	int yCoordinate;
 	
+	
+	
 	public void random(){
 		Random random = new Random();
 		x = random.nextInt(12);
