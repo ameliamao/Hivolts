@@ -1,8 +1,10 @@
 package hivolts;
 
+import java.awt.*;
+
 public class Mho {
 	private int x, y;
-	private Mho(int x, int y) {
+	public Mho(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
@@ -13,5 +15,9 @@ public class Mho {
 	
 	public int getMhoY(int y) {
 		return y;
+	}
+	
+	public void draw(Graphics g) {
+		
 	}
 }
