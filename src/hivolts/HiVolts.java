@@ -2,8 +2,10 @@ package hivolts;
 
 import java.awt.*;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+@SuppressWarnings("serial")
 public class HiVolts extends JPanel{
 	public final int width = 1440;
 	public final int height = 1440;
@@ -26,7 +28,7 @@ public class HiVolts extends JPanel{
 		b.add(h);
 		b.setSize(2500, 1500);
 		b.setVisible(true);
-		b.setDefaultCloseOperation(b.EXIT_ON_CLOSE);
+		b.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 }
