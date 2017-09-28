@@ -3,17 +3,19 @@ package hivolts;
 import java.awt.*;
 
 import javax.swing.JApplet;
+@SuppressWarnings("serial")
 public class HiVolts extends JApplet{
 	public final int width = 1440;
 	public final int height = 1440;
 	public Fence[] fenceBorder = new Fence[44];
 	public Fence[] randomFences = new Fence[20];
 	public HiVolts(){
-		initialize();
+		init();
 	}
-	public void initialize(){
-		setBackground(Color.DARK_GRAY);
+	public void init(){
 		setSize(width, height);
+		this.setBackground(Color.DARK_GRAY);
+		setVisible(true);
 		repaint();
 		createBorder();
 		createRandomFences();
@@ -43,7 +45,7 @@ public class HiVolts extends JApplet{
 		
 	}
 	
-	public void paintComponent(Graphics g){
+	public void paint(Graphics g){
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		drawBorder(g);
