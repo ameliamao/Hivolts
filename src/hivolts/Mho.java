@@ -1,9 +1,17 @@
 package hivolts;
 
 public class Mho {
-	int x, y;
-	public Mho(int x, int y) {
+	private int x, y;
+	private Mho(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+	
+	public int getMhoX(int x) {
+		return x;
+	}
+	
+	public int getMhoY(int y) {
+		return y;
 	}
 }
