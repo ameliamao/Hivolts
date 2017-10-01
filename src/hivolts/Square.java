@@ -5,11 +5,12 @@ public abstract class Square {
 	//all are ints because coordinates are never going to be doubles
 	
 	//numerical place aka 0-11 by 0-11
-	int[] coordinates[];
+	int[][] coordinates[][];
 	
 	//actual points on the screen
-	int x;
-	int y;
+	int x, y;
+	
+	final int squareSide = 100;
 	
 	public void random(){
 		Random random = new Random();

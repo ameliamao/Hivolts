@@ -11,9 +11,10 @@ public class Fence extends Square{
 		this.y = height;
 		
 	}
-	public void draw (Graphics g){
+	//btw I changed this to one variable 
+	public void draw(Graphics g){
 		g.setColor(this.color);
-		g.fillRect(x, y, width, height);
+		g.fillRect(x, y, squareSide, squareSide);
 	}
 	
 }

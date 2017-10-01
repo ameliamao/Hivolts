@@ -5,10 +5,12 @@ import java.awt.*;
 import javax.swing.JApplet;
 @SuppressWarnings("serial")
 public class HiVolts extends JApplet{
-	public final int width = 1440;
-	public final int height = 1440;
+	public final int width = 1440;//to be changed...?
+	public final int height = 1440;//to be changed too?
 	public Fence[] fenceBorder = new Fence[44];
 	public Fence[] randomFences = new Fence[20];
+	
+	
 	
 	public HiVolts(){
 		init();
