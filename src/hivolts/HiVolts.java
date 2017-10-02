@@ -1,20 +1,23 @@
 package hivolts;
 
+import java.applet.Applet;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-import javax.swing.JApplet;
+//notice I switched to applet
+//I'm using keylistener, which is under awt, so applet is better
 @SuppressWarnings("serial")
-public class HiVolts extends JApplet{
+public class HiVolts extends Applet implements KeyListener{
 	public final int width = 1440;//to be changed...?
 	public final int height = 1440;//to be changed too?
 	public Fence[] fenceBorder = new Fence[44];
-	public Fence[] randomFences = new Fence[20];
+	public Fence[] randomFences = new Fence[20];	
 	
-	
-	
+	//not really nessacary...?
 	public HiVolts(){
-		init();
 	}
+	
 	public void init(){
 		setSize(width, height);
 		this.setBackground(Color.DARK_GRAY);
@@ -22,6 +25,7 @@ public class HiVolts extends JApplet{
 		repaint();
 		createBorder();
 		createRandomFences();
+		addKeyListener(this);
 	}
 	
 	public void createBorder(){
@@ -48,9 +52,27 @@ public class HiVolts extends JApplet{
 		
 	}
 	
+	
 	public void paint(Graphics g){
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		drawBorder(g);
+	}
+	
+	//to be changed!!!
+	@Override
+	public void keyPressed(KeyEvent e) {
+		System.out.println("thing");
+		return;
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {
+		System.out.println("thing");
+		return;
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+		System.out.println("thing");
+		return;
 	}
 }
