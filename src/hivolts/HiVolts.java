@@ -21,7 +21,7 @@ public class HiVolts extends Applet implements KeyListener{
 		//other creating methods
 		createBorder();
 		createRandomFences();
-		player = new Player(0,0);
+		player = new Player();
 		
 		
 		repaint();
