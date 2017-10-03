@@ -12,10 +12,9 @@ public abstract class Square {
 	
 	final int squareSide = 100;
 	
-	public void random(){
+	public static int random(){
 		Random random = new Random();
-		x = random.nextInt(12);
-		y = random.nextInt(12);
+		return (((random.nextInt(10)+1) * 110) + 10);
 	}
 	
 	public int getX(){

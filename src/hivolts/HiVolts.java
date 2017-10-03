@@ -43,15 +43,24 @@ public class HiVolts extends Applet implements KeyListener{
 			fenceBorder[i].draw(g);
 		}
 	}
+	
 	public void createRandomFences(){
-		
+		for(int i = 0; i < 20; i++){
+		randomFences[i] = new Fence(Square.random(), Square.random());
+		}
 	}
 	
+	public void drawRandomFences(Graphics g){
+		for(int i = 0; i < 20; i++){
+			randomFences[i].draw(g);
+		}
+	}
 	
 	public void paint(Graphics g){
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		drawBorder(g);
+		drawRandomFences(g);
 	}
 	
 	//to be changed!!!
