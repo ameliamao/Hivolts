@@ -1,5 +1,4 @@
 package hivolts;
-
 import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -9,14 +8,10 @@ import java.awt.event.KeyListener;
 //I'm using keylistener, which is under awt, so applet is better
 @SuppressWarnings("serial")
 public class HiVolts extends Applet implements KeyListener{
-	public final int windowWidth = 1440;//to be changed...?
-	public final int windowHeight = 1440;//to be changed too?
+	public final int windowWidth = 1500;//to be changed...?
+	public final int windowHeight = 1500;//to be changed too?
 	public Fence[] fenceBorder = new Fence[44];
 	public Fence[] randomFences = new Fence[20];	
-	
-	//not really nessacary...?
-	public HiVolts(){
-	}
 	
 	public void init(){
 		setSize(windowWidth, windowHeight);

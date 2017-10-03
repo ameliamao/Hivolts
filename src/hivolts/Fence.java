@@ -8,7 +8,7 @@ public class Fence extends Square{
 	
 	public Fence(int x, int y){
 		this.x = x;
-		this.y = height;
+		this.y = y;
 		
 	}
 	//btw I changed this to one variable 
