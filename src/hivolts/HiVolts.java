@@ -11,15 +11,21 @@ public class HiVolts extends Applet implements KeyListener{
 	public final int windowWidth = 1500;//to be changed...?
 	public final int windowHeight = 1500;//to be changed too?
 	public Fence[] fenceBorder = new Fence[44];
-	public Fence[] randomFences = new Fence[20];	
+	public Fence[] randomFences = new Fence[20];
+	public Player player;
 	
 	public void init(){
 		setSize(windowWidth, windowHeight);
 		this.setBackground(Color.DARK_GRAY);
-		setVisible(true);
-		repaint();
+		
+		//other creating methods
 		createBorder();
 		createRandomFences();
+		player = new Player();
+		
+		
+		repaint();
+		setVisible(true);
 		addKeyListener(this);
 	}
 	
@@ -56,27 +62,28 @@ public class HiVolts extends Applet implements KeyListener{
 		}
 	}
 	
+	@Override
 	public void paint(Graphics g){
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		drawBorder(g);
 		drawRandomFences(g);
+		//run all the draws for everything
+		
 	}
+	
 	
 	//to be changed!!!
 	@Override
 	public void keyPressed(KeyEvent e) {
 		System.out.println("thing");
-		return;
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
 		System.out.println("thing");
-		return;
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {
 		System.out.println("thing");
-		return;
 	}
 }
