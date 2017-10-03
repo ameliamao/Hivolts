@@ -52,7 +52,7 @@ public class HiVolts extends Applet implements KeyListener{
 		
 	}
 	
-	
+	@Override
 	public void paint(Graphics g){
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
