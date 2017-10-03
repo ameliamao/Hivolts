@@ -9,8 +9,8 @@ import java.awt.event.KeyListener;
 //I'm using keylistener, which is under awt, so applet is better
 @SuppressWarnings("serial")
 public class HiVolts extends Applet implements KeyListener{
-	public final int width = 1440;//to be changed...?
-	public final int height = 1440;//to be changed too?
+	public final int windowWidth = 1440;//to be changed...?
+	public final int windowHeight = 1440;//to be changed too?
 	public Fence[] fenceBorder = new Fence[44];
 	public Fence[] randomFences = new Fence[20];	
 	
@@ -19,7 +19,7 @@ public class HiVolts extends Applet implements KeyListener{
 	}
 	
 	public void init(){
-		setSize(width, height);
+		setSize(windowWidth, windowHeight);
 		this.setBackground(Color.DARK_GRAY);
 		setVisible(true);
 		repaint();
