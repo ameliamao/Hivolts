@@ -13,18 +13,6 @@ public abstract class Square {
     protected boolean vis;
     protected Image image;
 
-	
-	//what ashu is currently using
-	//theres like a million comments about this, but random should return random from 0-11
-	public static int random(){
-		Random random = new Random();
-		return (((random.nextInt(10)+1) * 110) + 10);
-	}
-	
-	//Could we make this the final random thing? 
-	//You could then plug in this to a "to coordinate" (below)
-
-    
 	final int scalar = 50;
 	final int squareSide = 40;
 

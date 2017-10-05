@@ -7,7 +7,7 @@ public class Player extends Square {
 	
 	public Player() {
 			x = random2();
-			y = 12; // because my screen is too small, to be changed later
+			y = random2(); // because my screen is too small, to be changed later
 	}
 	
 	public void changePosition(int newX, int newY){
