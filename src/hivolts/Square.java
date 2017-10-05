@@ -6,19 +6,13 @@ import javax.swing.ImageIcon;
 import java.awt.*;
 
 public abstract class Square {
-	//all are ints because coordinates are never going to be doubles
-	
-	//numerical place aka 0-11 by 0-11
-	//int[][] coordinates[][];  <-- decided not to use this...?
-	
-	
-	//actual points on the screen
 	int x, y;
 	protected int width;
     protected int height;
     
     protected boolean vis;
     protected Image image;
+<<<<<<< HEAD
 
 	final int squareSide = 100;
 	
@@ -31,6 +25,12 @@ public abstract class Square {
 	
 	//Could we make this the final random-ifier? 
 	//You could then plug in this to a "tocoordinate" (below)
+=======
+    
+	final int scalar = 50;
+	final int squareSide = 40;
+
+>>>>>>> ccc14d9d988ab128759222f8a8655a05da98ff90
 	public static int random2(){
 		Random random = new Random();
 		return random.nextInt(10)+1;
@@ -45,7 +45,6 @@ public abstract class Square {
 	}
 	
 	protected void getImageDimensions() {
-
         width = image.getWidth(null);
         height = image.getHeight(null);
     }
@@ -67,6 +66,10 @@ public abstract class Square {
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
     }
-
-    //Someone make a "tocoordinate" method that turns the x,y (0-11) to the actual coordinate (probably in the hundreds)??????
+    
+    public abstract void draw (Graphics g);
+    
+    public int toCoordinate(int index){
+    	return index*scalar + 20;
+    }
 }
