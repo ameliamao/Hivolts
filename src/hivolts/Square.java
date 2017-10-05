@@ -12,9 +12,7 @@ public abstract class Square {
     
     protected boolean vis;
     protected Image image;
-<<<<<<< HEAD
 
-	final int squareSide = 100;
 	
 	//what ashu is currently using
 	//theres like a million comments about this, but random should return random from 0-11
@@ -25,12 +23,11 @@ public abstract class Square {
 	
 	//Could we make this the final random-ifier? 
 	//You could then plug in this to a "tocoordinate" (below)
-=======
+
     
 	final int scalar = 50;
 	final int squareSide = 40;
 
->>>>>>> ccc14d9d988ab128759222f8a8655a05da98ff90
 	public static int random2(){
 		Random random = new Random();
 		return random.nextInt(10)+1;
