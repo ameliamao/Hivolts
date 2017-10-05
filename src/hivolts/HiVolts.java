@@ -4,77 +4,52 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-//notice I switched to applet
-//I'm using keylistener, which is under awt, so applet is better
 @SuppressWarnings("serial")
 public class HiVolts extends Applet implements KeyListener{
 	public final int windowWidth = 1500;//to be changed...?
 	public final int windowHeight = 1500;//to be changed too?
-	//ashu, could you fuse these into the field?  It'll make life a lot simpler for 
-	public Fence[] fenceBorder = new Fence[44];
-	public Fence[] randomFences = new Fence[20];
-	//eventually all sqaures, player, mhos, will be stored in this master 2d array for simplicity
-	public Square[][] field = new Square[11][11];
-	public Player player;
+	public Square[][] field = new Square[12][12];
+	public Player player; //will prob change this
 	
 	public void init(){
 		setSize(windowWidth, windowHeight);
 		this.setBackground(Color.DARK_GRAY);
-		createBorder();
-		createRandomFences();
+		createBorder2();
 		player = new Player();
 		repaint();
 		setVisible(true);
 		addKeyListener(this);
 		setFocusable(true);
         setFocusTraversalKeysEnabled(false);
-		System.out.println("init completed");
 	}
 	
+	public void createBorder2(){
+		for (int x = 0; x < 12; x++) {
+			for (int y = 0; y < 12; y++) {
+				if(x==0||x==11||y==0||y==11){
+					field[x][y] = new Fence(x,y);
+				}
+			}
+		}
+	}
+	
+	public void drawField(Graphics g){
+		for (int x = 0; x < 12; x++) {
+			for (int y = 0; y < 12; y++) {
+				if(field[x][y] != null){
+					System.out.println("drawin field");
+					field[x][y].draw(g);
+				}
+			}
+		}
 
-	//could you use the constants?
-	//sorry it looks weird on my computer because my computer is bad
-	//if you put the math in the fence class it'll work...maybe
-	public void createBorder(){
-		for(int i = 0; i < 12; i++){
-			fenceBorder[i] = new Fence(10+(110 * i) , 10);
-		}
-		for(int i = 12; i < 24; i++){
-			fenceBorder[i] = new Fence(10+ (110 * (i - 12)), 1220);
-		}
-		for(int i = 24; i < 34; i++){
-			fenceBorder[i] = new Fence(10, 120 + (110 * (i - 24)));
-		}
-		for(int i = 34; i < 44; i++){
-			fenceBorder[i] = new Fence(1220, 120 + (110 * (i - 34)));
-		}
-	}
-	
-	
-	public void drawBorder(Graphics g){
-		for (int i = 0; i < 44; i++){
-			fenceBorder[i].draw(g);
-		}
-	}
-	
-	public void createRandomFences(){
-		for(int i = 0; i < 20; i++){
-		randomFences[i] = new Fence(Square.random(), Square.random());
-		}
-	}
-	
-	public void drawRandomFences(Graphics g){
-		for(int i = 0; i < 20; i++){
-			randomFences[i].draw(g);
-		}
 	}
 	
 	@Override
 	public void paint(Graphics g){
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		drawBorder(g);
-		drawRandomFences(g);
+		drawField(g);
 		player.draw(g);		
 	}
 	

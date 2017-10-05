@@ -20,7 +20,7 @@ public class Player extends Square {
 		//for the time being:
 		g.setColor(Color.GREEN);
 		//multiplying by 10, because we currently need to sort out x,y vs the pixel coordinates
-		g.fillRect(10*x, 10*y, squareSide, squareSide);
+		g.fillRect(toCoordinate(x),toCoordinate(y), squareSide, squareSide);
 	}
 
 }
