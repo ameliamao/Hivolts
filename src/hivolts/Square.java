@@ -21,8 +21,8 @@ public abstract class Square {
 		return (((random.nextInt(10)+1) * 110) + 10);
 	}
 	
-	//Could we make this the final random-ifier? 
-	//You could then plug in this to a "tocoordinate" (below)
+	//Could we make this the final random thing? 
+	//You could then plug in this to a "to coordinate" (below)
 
     
 	final int scalar = 50;
