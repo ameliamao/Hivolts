@@ -16,10 +16,11 @@ public abstract class Square {
 	int x, y;
 	protected int width;
     protected int height;
+    
     protected boolean vis;
     protected Image image;
-	
-	final int squareSide = 20;
+
+	final int squareSide = 100;
 	
 	//what ashu is currently using
 	//theres like a million comments about this, but random should return random from 0-11
