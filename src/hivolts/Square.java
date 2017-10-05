@@ -9,7 +9,8 @@ public abstract class Square {
 	//all are ints because coordinates are never going to be doubles
 	
 	//numerical place aka 0-11 by 0-11
-	int[][] coordinates[][];
+	//int[][] coordinates[][];  <-- decided not to use this...?
+	
 	
 	//actual points on the screen
 	int x, y;
@@ -18,11 +19,20 @@ public abstract class Square {
     protected boolean vis;
     protected Image image;
 	
-	final int squareSide = 100;
+	final int squareSide = 20;
 	
+	//what ashu is currently using
+	//theres like a million comments about this, but random should return random from 0-11
 	public static int random(){
 		Random random = new Random();
 		return (((random.nextInt(10)+1) * 110) + 10);
+	}
+	
+	//Could we make this the final random-ifier? 
+	//You could then plug in this to a "tocoordinate" (below)
+	public static int random2(){
+		Random random = new Random();
+		return random.nextInt(10)+1;
 	}
 	
 	public int getX(){
@@ -57,4 +67,5 @@ public abstract class Square {
         return new Rectangle(x, y, width, height);
     }
 
+    //Someone make a "tocoordinate" method that turns the x,y (0-11) to the actual coordinate (probably in the hundreds)??????
 }
