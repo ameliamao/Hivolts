@@ -59,7 +59,14 @@ public class HiVolts extends Applet implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {	
 		char key = e.getKeyChar();
-		if (Arrays.asList(keys).contains(key)) {
+		boolean contains = false;
+		for (char c : keys) {
+		    if (c == key) {
+		        contains = true;
+		        break;
+		    }
+		}
+		if (contains) {
 			System.out.println("true");
 			field[player.getX()][player.getY()] = null;
 			switch (key) {
@@ -76,7 +83,7 @@ public class HiVolts extends Applet implements KeyListener{
 				player.changePosition(-1, 0);
 				break;
 			case 's':
-				//randomize this
+				player.changePosition(0, 1);
 				break;
 			case 'd':
 				player.changePosition(1, 0);
@@ -85,7 +92,7 @@ public class HiVolts extends Applet implements KeyListener{
 				player.changePosition(-1, 1);
 				break;
 			case 'x':
-				player.changePosition(0, 1);
+				//randomize this
 				break;
 			case 'c':
 				player.changePosition(1, 1);
