@@ -3,6 +3,7 @@ import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Arrays;
 
 @SuppressWarnings("serial")
 public class HiVolts extends Applet implements KeyListener{
@@ -10,6 +11,9 @@ public class HiVolts extends Applet implements KeyListener{
 	public final int windowHeight = 1500;//to be changed too?
 	public Square[][] field = new Square[12][12];
 	public Player player; //will prob change this
+	public char[] keys = {'q','w', 'e', 'a', 's','d','z','x','c'};
+	
+	
 	
 	public void init(){
 		setSize(windowWidth, windowHeight);
@@ -37,7 +41,6 @@ public class HiVolts extends Applet implements KeyListener{
 		for (int x = 0; x < 12; x++) {
 			for (int y = 0; y < 12; y++) {
 				if(field[x][y] != null){
-					System.out.println("drawin field");
 					field[x][y].draw(g);
 				}
 			}
@@ -54,42 +57,41 @@ public class HiVolts extends Applet implements KeyListener{
 	}
 	
 	@Override
-	public void keyPressed(KeyEvent e) {		
-		if(e.getKeyChar() == 'q'){
+	public void keyPressed(KeyEvent e) {	
+		char key = e.getKeyChar();
+		if (Arrays.asList(keys).contains(key)) {
+			System.out.println("true");
 			field[player.getX()][player.getY()] = null;
-			player.changePosition(-1, -1);
+			switch (key) {
+			case 'q': 
+				player.changePosition(-1, -1);
+				break;
+			case 'w':
+				player.changePosition(0, -1);
+				break;
+			case 'e':
+				player.changePosition(1, -1);
+				break;
+			case 'a':
+				player.changePosition(-1, 0);
+				break;
+			case 's':
+				//randomize this
+				break;
+			case 'd':
+				player.changePosition(1, 0);
+				break;
+			case 'z':
+				player.changePosition(-1, 1);
+				break;
+			case 'x':
+				player.changePosition(0, 1);
+				break;
+			case 'c':
+				player.changePosition(1, 1);
+				break;
+			}
 			field[player.getX()][player.getY()] = player;
-		}
-		else if(e.getKeyChar() == 'w'){
-			field[player.getX()][player.getY()] = null;
-			player.changePosition(0, -1);
-		}
-		else if(e.getKeyChar() == 'e'){
-			field[player.getX()][player.getY()] = null;
-			player.changePosition(1, -1);
-		}
-		else if(e.getKeyChar() == 'a'){
-			field[player.getX()][player.getY()] = null;
-			player.changePosition(-1, 0);
-		}
-		else if(e.getKeyChar() == 's'){
-			//RANDOMIFYYY!!!
-		}
-		else if(e.getKeyChar() == 'd'){
-			field[player.getX()][player.getY()] = null;
-			player.changePosition(1, 0);
-		}
-		else if(e.getKeyChar() == 'z'){
-			field[player.getX()][player.getY()] = null;
-			player.changePosition(-1, 1);
-		}
-		else if(e.getKeyChar() == 'x'){
-			field[player.getX()][player.getY()] = null;
-			player.changePosition(0, 1);
-		}
-		else if(e.getKeyChar() == 'c'){
-			field[player.getX()][player.getY()] = null;
-			player.changePosition(1, 1);
 		}
 		repaint();
 	}
