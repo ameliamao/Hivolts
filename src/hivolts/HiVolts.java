@@ -62,12 +62,11 @@ public class HiVolts extends Applet implements KeyListener{
 		boolean contains = false;
 		for (char c : keys) {
 		    if (c == key) {
-		        contains = true;
+		        contains = true; 
 		        break;
 		    }
 		}
 		if (contains) {
-			System.out.println("true");
 			field[player.getX()][player.getY()] = null;
 			switch (key) {
 			case 'q': 
@@ -102,6 +101,7 @@ public class HiVolts extends Applet implements KeyListener{
 		}
 		repaint();
 	}
+	
 	@Override
 	public void keyReleased(KeyEvent arg0) {}
 	@Override
