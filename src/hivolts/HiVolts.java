@@ -14,6 +14,7 @@ public class HiVolts extends Applet implements KeyListener{
 	public Player player; //will prob change this
 	public char[] keys = {'q','w', 'e', 'a', 's','d','z','x','c'};
 	public static ArrayList<Mho> Mhos = new ArrayList<Mho>();
+	public static ArrayList<Fence> Fences = new ArrayList<Fence>();
 	
 	
 	
@@ -21,7 +22,8 @@ public class HiVolts extends Applet implements KeyListener{
 		setSize(windowWidth, windowHeight);
 		this.setBackground(Color.DARK_GRAY);
 		createBorder2();
-		createRandoms();
+		createRandomFences();
+		createMhos();
 		player = new Player();
 		repaint();
 		setVisible(true);
@@ -41,17 +43,48 @@ public class HiVolts extends Applet implements KeyListener{
 		}
 	}
 	
-	public void createRandoms(){
-		for (int i = 0; i < 12; i++) {// 12 or whatever many randoms there supposed to be
+	public void createRandomFences(){
+		for (int i = 0; i < 20; i++) {
 			while(true){
 				int x = Square.random2();
 				int y = Square.random2();
 				if(field[x][y]==null){
 					field[x][y] = new Fence(x,y);
+					Fences.add(new Fence(x,y));
 					break;
 				}
 			}
 		}
+	}
+	
+	public void createMhos(){
+		for (int i = 0; i < 12; i++) {
+			while(true){
+				int x = Square.random2();
+				int y = Square.random2();
+				if(field[x][y]==null){
+					field[x][y] = new Mho(x,y);
+					Mhos.add(new Mho(x,y));
+					break;
+				}
+			}
+		} 
+	}
+	
+	public boolean mhosCanMoveOnEmptySpaces(int x, int y) {
+		boolean canMove = false;
+		if (field[x][y]==null) {
+			canMove = true;
+		} return canMove;
+	}
+	
+	public boolean mhosCanMoveOnFences(int x, int y) {
+		boolean canMove = false;
+		for (int i = 0; i < Fences.size(); i++) {
+			if (x == Fences.get(i).getX() && y == Fences.get(i).getY()) {
+				canMove = true;
+			} 
+		} return canMove;
 	}
 	
 	public void drawField(Graphics g){
@@ -115,7 +148,21 @@ public class HiVolts extends Applet implements KeyListener{
 			}
 			field[player.getX()][player.getY()] = player;
 		}
+		mhosTurn();
 		repaint();
+	}
+	
+	public void mhosTurn() {
+		for (int i = 0; i < Mhos.size(); i++) {
+			// Current mho
+			Mho m = Mhos.get(i);
+			
+			if (m == null) continue;
+			
+			// Move the mho and erase its original position
+			m.move(player, this);
+		}
+			
 	}
 	
 	@Override
