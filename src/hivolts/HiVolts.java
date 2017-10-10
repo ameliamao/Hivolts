@@ -97,21 +97,22 @@ public class HiVolts extends Applet implements KeyListener{
 		}
 	}
 	
-	public void checkForDeath(){
+	public boolean checkForDeath(){
 		for(int i = 0; i < Fences.size(); i++){
 			if (player.death(Fences.get(i).getX(), Fences.get(i).getY()) == true){
-				playerDeath();
+				return true;
 			}
 		for(int j = 0; j < Mhos.size(); j++){
 			if (player.death(Mhos.get(j).getX(), Mhos.get(j).getY()) == true){
-				playerDeath();
+				return true;
 			}
 		}
 		}
+		return false;
 	}
 	
 	public void playerDeath(){
-		player.setVisible(false);
+		
 	}
 	
 	@Override
@@ -121,7 +122,9 @@ public class HiVolts extends Applet implements KeyListener{
 		drawField(g);
 		player.draw(g);
 		drawMhos(g);
-		checkForDeath();
+		if (checkForDeath() == true){
+			System.out.println("Player is ded aF");
+		}
 	}
 	
 	@Override
