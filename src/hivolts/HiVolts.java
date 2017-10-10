@@ -21,12 +21,14 @@ public class HiVolts extends Applet implements KeyListener{
 		setSize(windowWidth, windowHeight);
 		this.setBackground(Color.DARK_GRAY);
 		createBorder2();
+		createRandoms();
 		player = new Player();
 		repaint();
 		setVisible(true);
 		addKeyListener(this);
 		setFocusable(true);
         setFocusTraversalKeysEnabled(false);
+        System.out.println("init completed");
 	}
 	
 	public void createBorder2(){
@@ -34,6 +36,19 @@ public class HiVolts extends Applet implements KeyListener{
 			for (int y = 0; y < 12; y++) {
 				if(x==0||x==11||y==0||y==11){
 					field[x][y] = new Fence(x,y);
+				}
+			}
+		}
+	}
+	
+	public void createRandoms(){
+		for (int i = 0; i < 12; i++) {// 12 or whatever many randoms there supposed to be
+			while(true){
+				int x = Square.random2();
+				int y = Square.random2();
+				if(field[x][y]==null){
+					field[x][y] = new Fence(x,y);
+					break;
 				}
 			}
 		}
