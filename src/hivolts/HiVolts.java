@@ -103,6 +103,7 @@ public class HiVolts extends Applet implements KeyListener{
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		drawField(g);
 		player.draw(g);
+		drawMhos(g);
 	}
 	
 	@Override
@@ -151,6 +152,11 @@ public class HiVolts extends Applet implements KeyListener{
 			field[player.getX()][player.getY()] = player;
 		}
 		repaint();
+	}
+	public static void drawMhos(Graphics g) {
+		for (int i = 0; i < Mhos.size(); i++) {
+			Mhos.get(i).draw(g);	
+		}
 	}
 	
 	@Override
