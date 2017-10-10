@@ -3,6 +3,7 @@ import java.applet.Applet;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @SuppressWarnings("serial")
@@ -12,6 +13,7 @@ public class HiVolts extends Applet implements KeyListener{
 	public Square[][] field = new Square[12][12];
 	public Player player; //will prob change this
 	public char[] keys = {'q','w', 'e', 'a', 's','d','z','x','c'};
+	public static ArrayList<Mho> Mhos = new ArrayList<Mho>();
 	
 	
 	
@@ -45,7 +47,6 @@ public class HiVolts extends Applet implements KeyListener{
 				}
 			}
 		}
-
 	}
 	
 	@Override
@@ -53,7 +54,7 @@ public class HiVolts extends Applet implements KeyListener{
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		drawField(g);
-		player.draw(g);		
+		player.draw(g);
 	}
 	
 	@Override
