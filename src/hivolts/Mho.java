@@ -75,7 +75,7 @@ public class Mho extends Square{
 				this.x = diagPos[0];
 				this.y = diagPos[1];
 			} else if (gameBoard.mhosCanMoveOnEmptySpaces(carPos[0], carPos[1])) {
-				// Move cardinalDirectionly if landing on an empty space
+				// Move cardinalDirectionally if landing on an empty space
 				this.x = carPos[0];
 				this.y = carPos[1];				
 			} else if (gameBoard.mhosCanMoveOnFences(diagPos[0], diagPos[1])) {
@@ -83,7 +83,7 @@ public class Mho extends Square{
 				this.x = diagPos[0];
 				this.y = diagPos[1];
 			} else if (gameBoard.mhosCanMoveOnFences(carPos[0], carPos[1])) {
-				// Move cardinalDirectionly if landing on a fence
+				// Move cardinalDirectionally if landing on a fence
 				this.x = carPos[0];
 				this.y = carPos[1];	
 			}
