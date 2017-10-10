@@ -90,10 +90,16 @@ public class HiVolts extends Applet implements KeyListener{
 	public void drawField(Graphics g){
 		for (int x = 0; x < 12; x++) {
 			for (int y = 0; y < 12; y++) {
-				if(field[x][y] != null){
+				if (field[x][y] != null){
 					field[x][y].draw(g);
 				}
 			}
+		}
+	}
+	
+	public static void drawMhos(Graphics g) {
+		for (int i = 0; i < Mhos.size(); i++) {
+			Mhos.get(i).draw(g);	
 		}
 	}
 	
@@ -123,7 +129,7 @@ public class HiVolts extends Applet implements KeyListener{
 		player.draw(g);
 		drawMhos(g);
 		if (checkForDeath() == true){
-			System.out.println("Player is ded aF");
+			System.out.println();
 		}
 	}
 	
@@ -174,11 +180,6 @@ public class HiVolts extends Applet implements KeyListener{
 		}
 		repaint();
 	}
-	public static void drawMhos(Graphics g) {
-		for (int i = 0; i < Mhos.size(); i++) {
-			Mhos.get(i).draw(g);	
-		}
-	}
 	
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -196,6 +197,9 @@ public class HiVolts extends Applet implements KeyListener{
 			}
 			if (contains && key != 'j') {
 				m.move(player, this);
+				if (m.dead == true) {
+					Mhos.remove(m);
+				}
 				repaint();
 			}
 			

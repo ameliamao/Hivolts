@@ -8,10 +8,12 @@ public class Mho extends Square{
 		this.x = x;
 		this.y = y;
 	}
+	boolean dead;
 	
 	public Mho() {
 		this.x = random2();
 		this.y = random2();
+		dead = false;
 	}
 	
 	public boolean canMove(ArrayList<Fence> fences){
@@ -82,10 +84,12 @@ public class Mho extends Square{
 				// Move diagonally if landing on a fence
 				this.x = diagPos[0];
 				this.y = diagPos[1];
+				this.dead = true;
 			} else if (gameBoard.mhosCanMoveOnFences(carPos[0], carPos[1])) {
 				// Move cardinalDirectionally if landing on a fence
 				this.x = carPos[0];
 				this.y = carPos[1];	
+				this.dead = true;
 			}
 		}
 	}
