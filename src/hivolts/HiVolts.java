@@ -12,7 +12,7 @@ public class HiVolts extends Applet implements KeyListener{
 	public final int windowHeight = 1500;//to be changed too?
 	public Square[][] field = new Square[12][12];
 	public Player player; //will prob change this
-	public char[] keys = {'q','w', 'e', 'a', 's','d','z','x','c'};
+	public char[] keys = {'q','w', 'e', 'a', 's','d','z','x','c', 'j'};
 	public static ArrayList<Mho> Mhos = new ArrayList<Mho>();
 	public static ArrayList<Fence> Fences = new ArrayList<Fence>();
 	
@@ -131,7 +131,6 @@ public class HiVolts extends Applet implements KeyListener{
 				player.changePosition(-1, 0);
 				break;
 			case 's':
-				player.changePosition(0, 1);
 				break;
 			case 'd':
 				player.changePosition(1, 0);
@@ -140,33 +139,41 @@ public class HiVolts extends Applet implements KeyListener{
 				player.changePosition(-1, 1);
 				break;
 			case 'x':
-				//randomize this
+				player.changePosition(0, 1);
 				break;
 			case 'c':
 				player.changePosition(1, 1);
 				break;
+			case 'j':
+				//randomize this
+				break;
 			}
 			field[player.getX()][player.getY()] = player;
 		}
-		mhosTurn();
 		repaint();
 	}
 	
-	public void mhosTurn() {
+	@Override
+	public void keyReleased(KeyEvent e) {
 		for (int i = 0; i < Mhos.size(); i++) {
-			// Current mho
 			Mho m = Mhos.get(i);
 			
 			if (m == null) continue;
+			char key = e.getKeyChar();
+			boolean contains = false;
+			for (char c : keys) {
+			    if (c == key) {
+			        contains = true; 
+			        break;
+			    }
+			}
+			if (contains && key != 'j') {
+				m.move(player, this);
+				repaint();
+			}
 			
-			// Move the mho and erase its original position
-			m.move(player, this);
 		}
-			
 	}
-	
-	@Override
-	public void keyReleased(KeyEvent arg0) {}
 	@Override
 	public void keyTyped(KeyEvent arg0) {}
 	
