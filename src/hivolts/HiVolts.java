@@ -85,21 +85,19 @@ public class HiVolts extends Applet implements KeyListener{
 				Grid.player.changePosition(1, 1);
 				break;
 			case 'j':
-				//randomize this
+				grid.changeToRandomPlayerPos();
 				break;
 			}
-			if(grid.field[Grid.player.getX()][Grid.player.getY()]==null){
-				grid.field[Grid.player.getX()][Grid.player.getY()] = Grid.player;
+			grid.field[Grid.player.getX()][Grid.player.getY()] = Grid.player;
+			if(key != 'j'){
 				grid.moveMhos();
-			}
-			else{
-				System.out.println("ded ");
-				gameStatus = false;
 			}
 		}
 		
 		repaint();
 	}
+	
+	
 	
 	@Override
 	public void keyReleased(KeyEvent e) {}

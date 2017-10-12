@@ -86,13 +86,43 @@ public class Grid {
 		}
 		return canMove;
 	}
+	public void changeToRandomPlayerPos() {
+		int[] pos = new int[2];
+		pos[0] = Square.random2();
+		pos[1] = Square.random2();
+		while(!isPlayerOnFence(pos)) {
+			pos[0] = Square.random2();
+			pos[1] = Square.random2();
+		}
+		field[player.getX()][player.getY()] = null;
+//		for (int x = 0; x < 12; x++) {
+//			for (int y = 0; y < 12; y++) {
+//				if(field[x][y] == player){
+//					System.out.println("if");
+//					field[x][y] = null;
+//					player.x = pos[0];
+//					player.y = pos[1];
+//				//	field[pos[0]][pos[1]] = player;
+//				}
+//			}
+		player.x = pos[0];
+		player.y = pos[1];
+		//}
+		
+	}
+	public boolean isPlayerOnFence(int[] position) {
+		if (field[position[0]][position[1]] instanceof Fence) {
+			return false;
+		}
+		return true;
+	}
 	
 	public void moveMhos(){
 		for (int x = 0; x < 12; x++) {
 			for (int y = 0; y < 12; y++) {
 				if(field[x][y] instanceof Mho){
 					field[x][y] = null;
-					if(x == player.x && y == player.y){
+					if(x == player.getX() && y == player.getY()){
 						HiVolts.gameStatus = false;
 					}
 					else if (x == player.getX()) {
@@ -137,15 +167,9 @@ public class Grid {
 						int[] carPos = {x + cardinalDirection[0], y + cardinalDirection[1]};
 						
 						if (mhosCanMoveOnEmptySpaces(diagPos[0], diagPos[1])) {
-							// Move diagonally if landing on an empty space
-							//this.x = diagPos[0];
-							//this.y = diagPos[1];
 							field[diagPos[0]][diagPos[1]] = new Mho(diagPos[0], diagPos[1]);
 							
-						} else if (mhosCanMoveOnEmptySpaces(carPos[0], carPos[1])) {
-							// Move cardinalDirectionally if landing on an empty space
-							//this.x = carPos[0];
-							//this.y = carPos[1];		
+						} else if (mhosCanMoveOnEmptySpaces(carPos[0], carPos[1])) {	
 							field[carPos[0]][carPos[1]] = new Mho(carPos[0], carPos[1]);
 						} else if (mhosCanMoveOnFences(diagPos[0], diagPos[1])) {
 							// Move diagonally if landing on a fence
@@ -155,7 +179,6 @@ public class Grid {
 							
 							//HiVolts.gameStatus = false;
 							//Nothing because its dead???
-							//amelliaiiiiiaiaiaaia
 						} else if (mhosCanMoveOnFences(carPos[0], carPos[1])) {
 							// Move cardinalDirectionally if landing on a fence
 							//this.x = carPos[0];

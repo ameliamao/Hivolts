@@ -18,7 +18,7 @@ public abstract class Square {
 
 	public static int random2(){
 		Random random = new Random();
-		return random.nextInt(10)+1;
+		return random.nextInt(9)+1;
 	}
 	
 	public int getX(){

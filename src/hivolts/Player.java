@@ -18,6 +18,8 @@ public class Player extends Square {
 		y = y + newY;
 	}
 	
+	
+	
 	public boolean death(int deathX, int deathY){
 		if (this.x == deathX && this.y == deathY){
 			return true;
