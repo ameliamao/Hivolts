@@ -28,7 +28,7 @@ public abstract class Square {
 	public int getY(){
 		return this.y;
 	}
-	
+		
 	protected void getImageDimensions() {
         width = image.getWidth(null);
         height = image.getHeight(null);
