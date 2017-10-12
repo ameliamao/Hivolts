@@ -13,7 +13,10 @@ public class DeadScreen {
 	public DeadScreen(boolean dead){
 		playAgain = new PlayAgain();
 		playAgain.setBounds(100, 550, 100, 100); //SOMEBODY WITH GOOD ARTSY SENSE PLEASE CHANGE THIS
-		playAgain.setVisible(false);
+		if (!dead) {
+			playAgain.setVisible(false);
+		}
+		playAgain.setVisible(true);
 
 	}
 	

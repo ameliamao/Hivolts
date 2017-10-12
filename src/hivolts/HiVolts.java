@@ -37,6 +37,7 @@ public class HiVolts extends Applet implements KeyListener{
 	
 	@Override
 	public void paint(Graphics g){
+		gameStatus = true;
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		grid.draw(g);
@@ -54,6 +55,7 @@ public class HiVolts extends Applet implements KeyListener{
 		        contains = true; 
 		        break;
 		    }
+		 
 		}
 		if (contains) {
 			grid.field[Grid.player.getX()][Grid.player.getY()] = null;
@@ -88,12 +90,23 @@ public class HiVolts extends Applet implements KeyListener{
 				grid.changeToRandomPlayerPos();
 				break;
 			}
-			grid.field[Grid.player.getX()][Grid.player.getY()] = Grid.player;
+			int[] pos = {Grid.player.wantedX, Grid.player.wantedY};
+			if(grid.isPlayerOnFence(pos) || grid.isPlayerOnMho(pos)) {
+				System.out.println("goodbye");
+				gameStatus = false;
+			}
+			else{
+				Grid.player.x = Grid.player.wantedX;
+				Grid.player.y = Grid.player.wantedY;
+				System.out.println("hello");
+				grid.field[Grid.player.x][Grid.player.y] = Grid.player;
+				
+				
+			}
 			if(key != 'j'){
 				grid.moveMhos();
 			}
 		}
-		
 		repaint();
 	}
 	

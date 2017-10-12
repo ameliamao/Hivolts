@@ -11,8 +11,10 @@ public class Mho extends Square{
 	boolean dead;
 	
 	public Mho() {
-		this.x = random2();
-		this.y = random2();
+		x = random2();
+		y = random2();
+		wantedX = x;
+		wantedY = y;
 		dead = false;
 	}
 	

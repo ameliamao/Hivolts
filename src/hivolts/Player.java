@@ -5,20 +5,23 @@ import java.awt.Graphics;
 
 public class Player extends Square {
 	
-	static boolean dead;
+	boolean dead;
+	int wantedX;
+	int wantedY;
 	
 	public Player() {
 			x = random2();
 			y = random2();
+			wantedX = x;
+			wantedY = y;
 			dead = false;
 	}
 	
 	public void changePosition(int newX, int newY){
-		x = x + newX;
-		y = y + newY;
+		wantedX += newX;
+		wantedY += wantedY + newY;
 	}
-	
-	
+
 	
 	public boolean death(int deathX, int deathY){
 		if (this.x == deathX && this.y == deathY){

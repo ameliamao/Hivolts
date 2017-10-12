@@ -95,26 +95,25 @@ public class Grid {
 			pos[1] = Square.random2();
 		}
 		field[player.getX()][player.getY()] = null;
-//		for (int x = 0; x < 12; x++) {
-//			for (int y = 0; y < 12; y++) {
-//				if(field[x][y] == player){
-//					System.out.println("if");
-//					field[x][y] = null;
-//					player.x = pos[0];
-//					player.y = pos[1];
-//				//	field[pos[0]][pos[1]] = player;
-//				}
-//			}
+
 		player.x = pos[0];
 		player.y = pos[1];
-		//}
 		
 	}
 	public boolean isPlayerOnFence(int[] position) {
 		if (field[position[0]][position[1]] instanceof Fence) {
-			return false;
+			System.out.println("fence");
+			return true;
 		}
-		return true;
+		System.out.println("notfence");
+		return false;
+	}
+	
+	public boolean isPlayerOnMho(int[] position) {
+		if (field[position[0]][position[1]] instanceof Mho) {
+			return true;
+		}
+		return false;
 	}
 	
 	public void moveMhos(){
@@ -123,7 +122,9 @@ public class Grid {
 				if(field[x][y] instanceof Mho){
 					field[x][y] = null;
 					if(x == player.getX() && y == player.getY()){
+						player.dead = true;
 						HiVolts.gameStatus = false;
+						System.out.println("went on player");
 					}
 					else if (x == player.getX()) {
 						if (y < player.y) {
@@ -175,11 +176,12 @@ public class Grid {
 							// Move diagonally if landing on a fence
 							//this.x = diagPos[0];
 							//this.y = diagPos[1];
-							//this.dead = true;
+							field[x][y] = null;
 							
 							//HiVolts.gameStatus = false;
 							//Nothing because its dead???
 						} else if (mhosCanMoveOnFences(carPos[0], carPos[1])) {
+							field[x][y] = null;
 							// Move cardinalDirectionally if landing on a fence
 							//this.x = carPos[0];
 							//this.y = carPos[1];	

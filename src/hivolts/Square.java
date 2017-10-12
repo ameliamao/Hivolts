@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 import java.awt.*;
 
 public abstract class Square {
-	int x, y;
+	int x, y, wantedX, wantedY;
 	protected int width;
     protected int height;
     
@@ -27,6 +27,14 @@ public abstract class Square {
 	
 	public int getY(){
 		return this.y;
+	}
+
+	public int getWantedX() {
+		return wantedX;
+	}
+	
+	public int getWantedY() {
+		return wantedY;
 	}
 		
 	protected void getImageDimensions() {
