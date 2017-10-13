@@ -8,29 +8,19 @@ import java.awt.event.KeyListener;
 import java.awt.image.*;
 import java.net.URL;
 
-import javax.swing.JButton;
-
-import hivolts.DeadScreen.PlayAgain;
-
 @SuppressWarnings("serial")
 public class HiVolts extends Applet implements KeyListener{
-	public static final int windowWidth = 1500;//to be changed...?
-	public static final int windowHeight = 1500;//to be changed too?
+	public static final int windowWidth = 1500;
+	public static final int windowHeight = 1500;
 	public static Grid grid;
 	public char[] keys = {'q','w', 'e', 'a', 's','d','z','x','c', 'j', 'u'};
 	public static boolean gameStatus;
-	public PlayAgain playAgain;
 	public Image helpScreen;
 	public Image deadScreen;
 		
 	public void init(){
 		setSize(windowWidth, windowHeight);
 		this.setBackground(Color.DARK_GRAY);
-		
-		playAgain = new PlayAgain();
-		playAgain.setBounds(100, 550, 100, 100); 
-		playAgain.setVisible(true);
-		add(playAgain);
 		
 		grid = new Grid();
 		gameStatus = true;
@@ -135,7 +125,6 @@ public class HiVolts extends Applet implements KeyListener{
 	
 	public void isDead(Graphics g){
 		if(!gameStatus){
-			playAgain.setVisible(true);
 			System.out.println("prints when currently ded");
 			 g.drawImage(deadScreen, 0, 0, this);  
 		}
@@ -149,24 +138,8 @@ public class HiVolts extends Applet implements KeyListener{
 
 	@Override
 	public void keyReleased(KeyEvent e) {}
-	
+
 	@Override
-	public void keyTyped(KeyEvent arg0) {}
-	
-	public class PlayAgain extends JButton implements ActionListener {
-		PlayAgain() {
-			super("Play Again?");
-			addActionListener(this);
-		}
-
-		public void actionPerformed(ActionEvent arg0) {
-			//playAgain.setVisible(false);
-			//HiVolts.gameStatus = true;
-			reset();
-			repaint();
-
-			
-		}
-	}
+	public void keyTyped(KeyEvent e) {}
 	
 }
