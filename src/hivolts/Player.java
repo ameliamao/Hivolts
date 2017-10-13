@@ -19,7 +19,10 @@ public class Player extends Square {
 	
 	public void changePosition(int newX, int newY){
 		wantedX += newX;
-		wantedY += wantedY + newY;
+		wantedY += newY;
+		if(wantedX < 0 || wantedY < 0 || wantedX > 11 || wantedY > 11){
+			HiVolts.gameStatus = false;
+		}
 	}
 
 	

@@ -4,6 +4,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Mho extends Square{
+	boolean newMho = true;
+	
 	public Mho(int x, int y) {
 		this.x = x;
 		this.y = y;

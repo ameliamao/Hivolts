@@ -1,8 +1,14 @@
 package hivolts;
 import java.applet.Applet;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import javax.swing.JButton;
+
+import hivolts.DeadScreen.PlayAgain;
 
 @SuppressWarnings("serial")
 public class HiVolts extends Applet implements KeyListener{
@@ -12,15 +18,20 @@ public class HiVolts extends Applet implements KeyListener{
 	public char[] keys = {'q','w', 'e', 'a', 's','d','z','x','c', 'j'};
 	public DeadScreen deadScreen;
 	public static boolean gameStatus;
+	public PlayAgain playAgain;
 		
 	public void init(){
 		setSize(windowWidth, windowHeight);
 		this.setBackground(Color.DARK_GRAY);
 		
-		deadScreen = new DeadScreen(false);
-		add(deadScreen.playAgain);
+		playAgain = new PlayAgain();
+		playAgain.setBounds(100, 550, 100, 100); 
+		playAgain.setVisible(false);
+		add(playAgain);
 		
-		reset();
+		grid = new Grid();
+		gameStatus = true;
+		grid.updateMhos();
 		
 		repaint();
 		setVisible(true);
@@ -31,19 +42,23 @@ public class HiVolts extends Applet implements KeyListener{
 	}
 	
 	public static void reset(){
-		grid = new Grid();
 		gameStatus = true;
+		grid.clear();
+		grid.createGrid();
+		grid.updateMhos();
+		grid.changeToRandomPlayerPos();
 	}
 	
 	@Override
 	public void paint(Graphics g){
-		gameStatus = true;
-		g.setColor(Color.DARK_GRAY);
-		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		grid.draw(g);
-		if(!gameStatus){
-			deadScreen.draw(g);
+		//gameStatus = true;
+		if(gameStatus){
+			System.out.println("should be printing when alive and normal");
+			g.setColor(Color.DARK_GRAY);
+			g.fillRect(0, 0, this.getWidth(), this.getHeight());
+			grid.draw(g);
 		}
+		isDead();
 	}
 	
 	@Override
@@ -55,7 +70,6 @@ public class HiVolts extends Applet implements KeyListener{
 		        contains = true; 
 		        break;
 		    }
-		 
 		}
 		if (contains) {
 			grid.field[Grid.player.getX()][Grid.player.getY()] = null;
@@ -105,17 +119,39 @@ public class HiVolts extends Applet implements KeyListener{
 			}
 			if(key != 'j'){
 				grid.moveMhos();
+				grid.updateMhos();
 			}
 		}
 		repaint();
 	}
 	
-	
-	
+	public void isDead(){
+		if(!gameStatus){
+			playAgain.setVisible(true);
+			System.out.println("prints when currently ded");
+		}
+	}
+
 	@Override
 	public void keyReleased(KeyEvent e) {}
 	
 	@Override
 	public void keyTyped(KeyEvent arg0) {}
+	
+	public class PlayAgain extends JButton implements ActionListener {
+		PlayAgain() {
+			super("Play Again?");
+			addActionListener(this);
+		}
+
+		public void actionPerformed(ActionEvent arg0) {
+			playAgain.setVisible(false);
+			HiVolts.gameStatus = true;
+			//HiVolts.reset();
+			repaint();
+
+			
+		}
+	}
 	
 }

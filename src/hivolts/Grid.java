@@ -5,9 +5,13 @@ import java.awt.Graphics;
 public class Grid {
 	public static Player player; 
 	public Square[][] field = new Square[12][12];
+	public int nuMos = 0;
 	
 	public Grid(){
+		player = new Player();
+		field[player.x][player.y] = player;
 		createGrid();
+		
 	}
 	
 	public void createBorder(){
@@ -28,7 +32,7 @@ public class Grid {
 				if(field[x][y]==null){
 					field[x][y] = new Fence(x,y);
 					//Fences.add(new Fence(x,y));
-					System.out.println("randoms");
+					//System.out.println("randoms");
 					break;
 				}
 			}
@@ -51,10 +55,11 @@ public class Grid {
 	
 	public void createGrid(){
 		createBorder();
-		player = new Player();
 		createRandomFences();
 		createMhos();
 	}
+	
+	
 	
 	public void drawField(Graphics g){
 		for (int x = 0; x < 12; x++) {
@@ -102,7 +107,7 @@ public class Grid {
 	}
 	public boolean isPlayerOnFence(int[] position) {
 		if (field[position[0]][position[1]] instanceof Fence) {
-			System.out.println("fence");
+			//System.out.println("fence");
 			return true;
 		}
 		System.out.println("notfence");
@@ -120,11 +125,16 @@ public class Grid {
 		for (int x = 0; x < 12; x++) {
 			for (int y = 0; y < 12; y++) {
 				if(field[x][y] instanceof Mho){
+					if(!field[x][y].newMho){
+					
 					field[x][y] = null;
+					nuMos+=1;
+					System.out.println(nuMos);
 					if(x == player.getX() && y == player.getY()){
 						player.dead = true;
 						HiVolts.gameStatus = false;
 						System.out.println("went on player");
+						return;
 					}
 					else if (x == player.getX()) {
 						if (y < player.y) {
@@ -193,8 +203,26 @@ public class Grid {
 							
 							//i hope it works
 						}
+						}
 					}
 				}
+			}
+		}
+	}
+	
+	public void clear(){
+		for (int x = 0; x < 12; x++) {
+			for (int y = 0; y < 12; y++) {
+				field[x][y] = null;
+			}
+		}
+	}
+	
+	public void updateMhos(){
+		for (int x = 0; x < 12; x++) {
+			for (int y = 0; y < 12; y++) {
+				if(field[x][y] instanceof Mho)
+					field[x][y].newMho = false;
 			}
 		}
 	}

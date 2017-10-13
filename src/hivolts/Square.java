@@ -15,6 +15,9 @@ public abstract class Square {
 
 	final int scalar = 50;
 	final int squareSide = 40;
+	
+	boolean newMho = true; // this is only used inside of mho
+	
 
 	public static int random2(){
 		Random random = new Random();
