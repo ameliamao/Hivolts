@@ -1,6 +1,6 @@
 -----------------------------------------------------------------
-HiVolts Project 
-AP Computer Science Period 4
+HiVolts Project  <br />
+AP Computer Science Period 4  <br />
 By Ashu Bhown, Amelia Mao, Sophia Vera
 -----------------------------------------------------------------
 (github.com/ameliamao/hivolts is where this project is located)
