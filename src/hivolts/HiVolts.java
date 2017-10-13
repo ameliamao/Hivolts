@@ -49,6 +49,7 @@ public class HiVolts extends Applet implements KeyListener{
 	public static void reset(){
 		gameStatus = true;
 		grid.clear();
+		grid.changeToRandomPlayerPos();
 		grid.createGrid();
 		grid.updateMhos();
 		grid.changeToRandomPlayerPos();
