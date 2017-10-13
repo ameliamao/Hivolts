@@ -17,6 +17,7 @@ public class HiVolts extends Applet implements KeyListener{
 	public static boolean gameStatus;
 	public Image helpScreen;
 	public Image deadScreen;
+	public Image wonScreen;
 		
 	public void init(){
 		setSize(windowWidth, windowHeight);
@@ -45,7 +46,6 @@ public class HiVolts extends Applet implements KeyListener{
 	
 	@Override
 	public void paint(Graphics g){
-		//gameStatus = true;
 		if(gameStatus){
 			System.out.println("should be printing when alive and normal");
 			g.setColor(Color.BLACK);
@@ -54,6 +54,7 @@ public class HiVolts extends Applet implements KeyListener{
 		}
 		 g.drawImage(helpScreen, 650, 0, this);  
 		isDead(g);
+		isWon(g);
 	}
 	
 	@Override
@@ -130,9 +131,16 @@ public class HiVolts extends Applet implements KeyListener{
 		}
 	}
 	
+	public void isWon(Graphics g){
+		if(grid.checkWin()){
+			g.drawImage(wonScreen, 0, 0, this);
+		}
+	}
+	
 	public void loadImage(){
 		helpScreen = getImage(getDocumentBase(), "res/Untitled-1.png");
 		deadScreen = getImage(getDocumentBase(), "res/DeadScreen.png");
+		wonScreen = getImage(getDocumentBase(), "res/WonScreen.png");
 		
 	}
 

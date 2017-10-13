@@ -124,7 +124,6 @@ public class Grid {
 						field[x][y] = null;
 						nuMos+=1;
 						System.out.println(nuMos);
-					}
 					if(x == player.getX() && y == player.getY()){
 						player.dead = true;
 						HiVolts.gameStatus = false;
@@ -178,7 +177,7 @@ public class Grid {
 						} else if (mhosCanMoveOnFences(carPos[0], carPos[1])) {
 							field[x][y] = null;
 						}
-					}
+					}}
 				}
 			}
 		}
@@ -204,5 +203,21 @@ public class Grid {
 	public void draw(Graphics g){
 		drawField(g);
 		player.draw(g);
+	}
+	
+	public boolean checkWin(){
+		int counter = 0;
+		for (int x = 0; x < 12; x++) {
+			for (int y = 0; y < 12; y++) {
+				if(field[x][y] instanceof Mho)
+					counter += 1;
+			}
+		}
+		if(counter == 0){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 }
