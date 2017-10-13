@@ -1,10 +1,13 @@
 package hivolts;
+
 import java.util.Random;
-
 import javax.swing.ImageIcon;
-
 import java.awt.*;
 
+/**
+ * The Square class is the parent class for Mho, Player, and Fence
+ * @author sophiaVera
+ */
 public abstract class Square {
 	int x, y, wantedX, wantedY;
 	protected int width;
@@ -19,6 +22,10 @@ public abstract class Square {
 	boolean newMho = true; // this is only used inside of mho
 	
 
+	/**
+	 * this function generates a random number between 0 and 10
+	 * @return a random integer
+	 */
 	public static int random2(){
 		Random random = new Random();
 		return random.nextInt(9)+1;
@@ -65,6 +72,7 @@ public abstract class Square {
     
     public abstract void draw (Graphics g);
     
+    //scalar for moving an object's x and y coordinates
     public int toCoordinate(int index){
     	return index*scalar + 20;
     }

@@ -3,12 +3,17 @@ package hivolts;
 import java.awt.Color;
 import java.awt.Graphics;
 
+/**
+ * The player class creates a player object 
+ * @author sophiaVera
+ */
 public class Player extends Square {
 	
 	boolean dead;
 	int wantedX;
 	int wantedY;
 	
+	//constructor
 	public Player() {
 			x = random2();
 			y = random2();
@@ -17,20 +22,20 @@ public class Player extends Square {
 			dead = false;
 	}
 	
+	/**
+	 * changes the position of the x and y positions of player based on 2 params
+	 * and checks to see if the new position is within the bounds of the board
+	 * @param newX: added to the original x-coordinate
+	 * @param newY: added to the original y-coordinate
+	 */
 	public void changePosition(int newX, int newY){
 		wantedX += newX;
 		wantedY += newY;
+		
+		//checks to see if player is out of bounds
 		if(wantedX < 0 || wantedY < 0 || wantedX > 11 || wantedY > 11){
 			HiVolts.gameStatus = false;
 		}
-	}
-
-	
-	public boolean death(int deathX, int deathY){
-		if (this.x == deathX && this.y == deathY){
-			return true;
-		}
-		return false;
 	}
 	
 	public void draw(Graphics g){

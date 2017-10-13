@@ -3,9 +3,15 @@ package hivolts;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * The Mho class, creates one Mho object and generates a random position, if needed.
+ * @author ameliamao
+ *
+ */
 public class Mho extends Square{
 	boolean newMho = true;
 	
+	//constructors
 	public Mho(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -18,17 +24,6 @@ public class Mho extends Square{
 		wantedX = x;
 		wantedY = y;
 		dead = false;
-	}
-	
-	public boolean canMove(ArrayList<Fence> fences){
-
-		for(Fence fence:fences){
-			if (fence.getX() == this.x  && fence.getY() == this.y){
-				return false;
-			}
-		}
-		return true;
-
 	}
 	
 	public void draw(Graphics g) {
