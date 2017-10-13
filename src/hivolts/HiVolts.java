@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.*;
+import java.net.URL;
 
 import javax.swing.JButton;
 
@@ -15,10 +17,11 @@ public class HiVolts extends Applet implements KeyListener{
 	public static final int windowWidth = 1500;//to be changed...?
 	public static final int windowHeight = 1500;//to be changed too?
 	public static Grid grid;
-	public char[] keys = {'q','w', 'e', 'a', 's','d','z','x','c', 'j'};
-	public DeadScreen deadScreen;
+	public char[] keys = {'q','w', 'e', 'a', 's','d','z','x','c', 'j', 'u'};
 	public static boolean gameStatus;
 	public PlayAgain playAgain;
+	public Image helpScreen;
+	public Image deadScreen;
 		
 	public void init(){
 		setSize(windowWidth, windowHeight);
@@ -26,7 +29,7 @@ public class HiVolts extends Applet implements KeyListener{
 		
 		playAgain = new PlayAgain();
 		playAgain.setBounds(100, 550, 100, 100); 
-		playAgain.setVisible(false);
+		playAgain.setVisible(true);
 		add(playAgain);
 		
 		grid = new Grid();
@@ -38,6 +41,7 @@ public class HiVolts extends Applet implements KeyListener{
 		addKeyListener(this);
 		setFocusable(true);
         setFocusTraversalKeysEnabled(false);
+        loadImage();
         System.out.println("init completed");
 	}
 	
@@ -54,11 +58,12 @@ public class HiVolts extends Applet implements KeyListener{
 		//gameStatus = true;
 		if(gameStatus){
 			System.out.println("should be printing when alive and normal");
-			g.setColor(Color.DARK_GRAY);
+			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, this.getWidth(), this.getHeight());
 			grid.draw(g);
 		}
-		isDead();
+		 g.drawImage(helpScreen, 650, 0, this);  
+		isDead(g);
 	}
 	
 	@Override
@@ -103,6 +108,9 @@ public class HiVolts extends Applet implements KeyListener{
 			case 'j':
 				grid.changeToRandomPlayerPos();
 				break;
+			case 'u':
+				reset();
+				repaint();
 			}
 			int[] pos = {Grid.player.wantedX, Grid.player.wantedY};
 			if(grid.isPlayerOnFence(pos) || grid.isPlayerOnMho(pos)) {
@@ -125,11 +133,18 @@ public class HiVolts extends Applet implements KeyListener{
 		repaint();
 	}
 	
-	public void isDead(){
+	public void isDead(Graphics g){
 		if(!gameStatus){
 			playAgain.setVisible(true);
 			System.out.println("prints when currently ded");
+			 g.drawImage(deadScreen, 0, 0, this);  
 		}
+	}
+	
+	public void loadImage(){
+		helpScreen = getImage(getDocumentBase(), "res/Untitled-1.png");
+		deadScreen = getImage(getDocumentBase(), "res/DeadScreen.png");
+		
 	}
 
 	@Override
@@ -145,9 +160,9 @@ public class HiVolts extends Applet implements KeyListener{
 		}
 
 		public void actionPerformed(ActionEvent arg0) {
-			playAgain.setVisible(false);
-			HiVolts.gameStatus = true;
-			//HiVolts.reset();
+			//playAgain.setVisible(false);
+			//HiVolts.gameStatus = true;
+			reset();
 			repaint();
 
 			
