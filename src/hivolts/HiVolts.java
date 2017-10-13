@@ -10,8 +10,6 @@ import java.net.URL;
 
 import javax.swing.JButton;
 
-import hivolts.DeadScreen.PlayAgain;
-
 @SuppressWarnings("serial")
 public class HiVolts extends Applet implements KeyListener{
 	public static final int windowWidth = 1500;//to be changed...?
