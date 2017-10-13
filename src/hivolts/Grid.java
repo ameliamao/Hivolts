@@ -120,13 +120,19 @@ public class Grid {
 	 * changes the player's position to another randomly generated spot
 	 */
 	public void changeToRandomPlayerPos() {
-		int[] pos = new int[2];
-		pos[0] = Square.random();
-		pos[1] = Square.random();
-		field[player.getX()][player.getY()] = null;
+		while(true){
+			int[] pos = new int[2];
+			pos[0] = Square.random();
+			pos[1] = Square.random();
+			field[player.getX()][player.getY()] = null;
 
-		player.wantedX = pos[0];
-		player.wantedY = pos[1];
+			player.wantedX = pos[0];
+			player.wantedY = pos[1];
+			if(field[player.wantedX][player.wantedY] == null){
+				field[player.wantedX][player.wantedY] = player;	
+				return;
+			}
+		}
 	}
 	
 	/**
@@ -166,6 +172,22 @@ public class Grid {
 	}
 	
 	/**
+	 * checks to see if a mho is on a fence
+	 * @param x: the x-coordinate of a mho
+	 * @param y: the y-coordinate of a mho
+	 * @return: a boolean for whether the mho is on a fence or not
+	 */
+	public boolean IsMhoNotOnFence(int x, int y){
+		if(field[x][y] instanceof Fence){
+			return false;
+		}
+		else{
+			return true;
+		}
+
+	}
+	
+	/**
 	 * moves the mhos according to the specifications provided
 	 */
 	public void moveMhos(){
@@ -185,20 +207,28 @@ public class Grid {
 						else if (x == player.getX()) {
 							if (y < player.y) {
 								isMhoOnPlayer(x, y+1);
-								field[x][y+1] = new Mho(x, y+1);
+								if( IsMhoNotOnFence( x, y+1 )){
+									field[x][y+1] = new Mho(x, y+1);
+								}
 							} else {
 								isMhoOnPlayer(x, y-1);
-								field[x][y-1] = new Mho(x, y-1);
+								if( IsMhoNotOnFence( x, y-1 )){
+									field[x][y-1] = new Mho(x, y-1);
+								}
 							}
 						}
 						//if mho is directly vertical to the player
 						else if (y == player.getY()) {
 							if (x < player.x) {
 								isMhoOnPlayer(x+1, y);
-								field[x+1][y] = new Mho(x+1,y);
+								if( IsMhoNotOnFence( x+1, y )){
+									field[x+1][y] = new Mho(x+1,y);
+								}
 							} else {
 								isMhoOnPlayer(x-1, y);
-								field[x-1][y] = new Mho(x-1, y);
+								if( IsMhoNotOnFence( x-1, y )){
+									field[x-1][y] = new Mho(x-1, y);
+								}
 							}
 						}
 						else {
@@ -227,12 +257,16 @@ public class Grid {
 							//checks if the mhos could move on an empty space going diagonally
 							if (mhosCanMoveOnEmptySpaces(diagPos[0], diagPos[1])) {
 								isMhoOnPlayer(diagPos[0], diagPos[1]);
-								field[diagPos[0]][diagPos[1]] = new Mho(diagPos[0], diagPos[1]);
+								if( IsMhoNotOnFence( diagPos[0], diagPos[1])){
+									field[diagPos[0]][diagPos[1]] = new Mho(diagPos[0], diagPos[1]);
+								}
 							}
 							//checks if the mhos could move on an empty space going horizontally/vertically
 							else if (mhosCanMoveOnEmptySpaces(carPos[0], carPos[1])) {	
 								isMhoOnPlayer(carPos[0], carPos[1]);
-								field[carPos[0]][carPos[1]] = new Mho(carPos[0], carPos[1]);
+								if( IsMhoNotOnFence(carPos[0], carPos[1])){
+									field[carPos[0]][carPos[1]] = new Mho(carPos[0], carPos[1]);
+								}
 							} 
 							//if the mho can not move onto an empty space and it can not move onto a fence, 
 							//then it stays in the same position

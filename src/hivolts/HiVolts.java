@@ -52,7 +52,7 @@ public class HiVolts extends Applet implements KeyListener{
 		grid.changeToRandomPlayerPos();
 		grid.createGrid();
 		grid.updateMhos();
-		grid.changeToRandomPlayerPos();
+		
 	}
 	
 	/**
@@ -61,6 +61,7 @@ public class HiVolts extends Applet implements KeyListener{
 	@Override
 	public void paint(Graphics g){
 		if(gameStatus){
+			System.out.println();
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, this.getWidth(), this.getHeight());
 			grid.draw(g);
