@@ -21,6 +21,10 @@ Code Overview:
 --------------
 Code Overview: This code is mainly focused around the Hivolts and Grid class.  Hivolts functions as user input, whereas Grid has the object field, which is a two dimensional array storing the elements of the blocks on the screen.  These elements are all either null or from classes extended from the abstract class Square, which is a basic mold of any block that has a place on the 12x12 grid and a coordinate on the screen.  The code originates in Hivolts' init, which sets up the grid and keylistener.  When a button is pressed, the code runs through the appropriate calculations for the new positions (most of which are is Grid) and updates them.  Then, it repaints, showing the updates, and depending on whether the game is won or lost, different pngs are displayed. If the user chooses to play again, they can press 'u' and the process repeats.
 
+Timeline and Results
+--------------------
+We had originally planned to finish the basic algebra for player and mho movement by the first weekend of the allotted time.  However this wasn't the case because Ashu was studying for midterms, Amelia was camping, and Sophia had family over.  We were not as prudent as we should have been concerning our busy schedules.  Also, in our timeline, we gave a lot of time towards graphics, as this took a while on the previous APCS project(USFlag).  This wasn't the case, as it took less than an hour.  If we were to repeat this project in the future, it would be wiser to create a plan that payed more attention to each others schedulese, and was more flexible if something went wrong.
+
 Code done by Ashu:
 ------------------
 I developed the Fence class, the initial board design, the fence randomization, initialization of the game, draw methods as well as paint methods, the death mechanic of the player (checking for death, confirming death, etc.), and slight tweaks to Mho movement. I created the first revision of the HiVolts game setup, which was later developed on by all three of us in future revisions. Of course, I also engaged in a lot of debugging in the later versions.
