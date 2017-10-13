@@ -2,6 +2,10 @@ package hivolts;
 
 import java.awt.Graphics;
 
+/**
+ * The Grid class contains all the calculation methods for hivolts
+ * @author ameliamao, sophiaVera, ashuBhown
+ */
 public class Grid {
 	public static Player player; 
 	public Square[][] field = new Square[12][12];
@@ -10,9 +14,11 @@ public class Grid {
 		player = new Player();
 		field[player.x][player.y] = player;
 		createGrid();
-		
 	}
 	
+	/**
+	 * creates the borders of the fences
+	 */
 	public void createBorder(){
 		for (int x = 0; x < 12; x++) {
 			for (int y = 0; y < 12; y++) {
@@ -23,43 +29,50 @@ public class Grid {
 		}
 	}
 	
+	/**
+	 * creates 20 random fences inside the game board
+	 */
 	public void createRandomFences(){
-		for (int i = 0; i < 12; i++) {
+		for (int i = 0; i < 20; i++) {
 			while(true){
-				int x = Square.random2();
-				int y = Square.random2();
+				int x = Square.random();
+				int y = Square.random();
 				if(field[x][y]==null){
 					field[x][y] = new Fence(x,y);
-					//Fences.add(new Fence(x,y));
-					//System.out.println("randoms");
 					break;
 				}
 			}
 		}
 	}
 	
+	/**
+	 * generates 12 randomly placed mhos on the board
+	 */
 	public void createMhos(){
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 12; i++) {
 			while(true){
-				int x = Square.random2();
-				int y = Square.random2();
+				int x = Square.random();
+				int y = Square.random();
 				if(field[x][y]==null){
 					field[x][y] = new Mho(x,y);
-					//Mhos.add(new Mho(x,y));
 					break;
 				}
 			}
 		} 
 	}
 	
+	/**
+	 * places all generated objects together
+	 */
 	public void createGrid(){
 		createBorder();
 		createRandomFences();
 		createMhos();
 	}
 	
-	
-	
+	/**
+	 *draws the complete board
+	 */
 	public void drawField(Graphics g){
 		for (int x = 0; x < 12; x++) {
 			for (int y = 0; y < 12; y++) {
@@ -70,6 +83,12 @@ public class Grid {
 		}
 	}
 	
+	/**
+	 * checker for if it is possible for the mho to move on an empty space
+	 * @param x: the x-coordinate of the mho
+	 * @param y: the y-coordinate of the mho
+	 * @return: a boolean to see if the mho can move 
+	 */
 	public boolean mhosCanMoveOnEmptySpaces(int x, int y) {
 		boolean canMove = false;
 		if (field[x][y]==null) {
@@ -77,6 +96,12 @@ public class Grid {
 		} return canMove;
 	}
 	
+	/**
+	 * checker for if it is possible for the mho to move on a fence
+	 * @param x: the x-coordinate of the mho
+	 * @param y: the y-coordinate of the mho
+	 * @return: a boolean to see if the mho can move 
+	 */
 	public boolean mhosCanMoveOnFences(int x, int y) {
 		boolean canMove = false;
 		for (int cols = 0; cols < 12; cols++) {
@@ -90,24 +115,37 @@ public class Grid {
 		}
 		return canMove;
 	}
+	
+	/**
+	 * changes the player's position to another randomly generated spot
+	 */
 	public void changeToRandomPlayerPos() {
 		int[] pos = new int[2];
-		pos[0] = Square.random2();
-		pos[1] = Square.random2();
+		pos[0] = Square.random();
+		pos[1] = Square.random();
 		field[player.getX()][player.getY()] = null;
 
 		player.wantedX = pos[0];
 		player.wantedY = pos[1];
 	}
+	
+	/**
+	 * checks to see if the player is on a fence
+	 * @param position: an int array for the x and y of the player
+	 * @return: a boolean for whether the player is on a fence or not
+	 */
 	public boolean isPlayerOnFence(int[] position) {
 		if (field[position[0]][position[1]] instanceof Fence) {
-			//System.out.println("fence");
 			return true;
 		}
-		System.out.println("notfence");
 		return false;
 	}
 	
+	/**
+	 * checks to see if the player is on a mho
+	 * @param position: an int array for the x and y of the player
+	 * @return: a boolean for whether the player is on a mho or not
+	 */
 	public boolean isPlayerOnMho(int[] position) {
 		if (field[position[0]][position[1]] instanceof Mho) {
 			return true;
@@ -115,24 +153,35 @@ public class Grid {
 		return false;
 	}
 	
+	/**
+	 * checks to see if a mho is on the player
+	 * @param x: the x-coordinate of a mho
+	 * @param y: the y-coordinate of a mho
+	 * @return: a boolean for whether the player is on a mho or not
+	 */
 	public void isMhoOnPlayer(int x, int y){
 		if(x == player.x && y == player.y){
 			HiVolts.gameStatus = false;
 		}
 	}
 	
+	/**
+	 * moves the mhos according to the specifications provided
+	 */
 	public void moveMhos(){
 		for (int x = 0; x < 12; x++) {
 			for (int y = 0; y < 12; y++) {
 				if(field[x][y] instanceof Mho){
 					if(!field[x][y].newMho){
 						field[x][y] = null;
+					}
+					//if mho is directly on the player
 					if(x == player.getX() && y == player.getY()){
 						player.dead = true;
 						HiVolts.gameStatus = false;
-						System.out.println("went on player");
 						return;
 					}
+					//if mho is directly horizontal to the player
 					else if (x == player.getX()) {
 						if (y < player.y) {
 							isMhoOnPlayer(x, y+1);
@@ -142,6 +191,7 @@ public class Grid {
 							field[x][y-1] = new Mho(x, y-1);
 						}
 					}
+					//if mho is directly vertical to the player
 					else if (y == player.getY()) {
 						if (x < player.x) {
 							isMhoOnPlayer(x+1, y);
@@ -174,26 +224,32 @@ public class Grid {
 						// Coordinates of new cardinalDirection position
 						int[] carPos = {x + cardinalDirection[0], y + cardinalDirection[1]};
 						
+						//checks if the mhos could move on an empty space going diagonally
 						if (mhosCanMoveOnEmptySpaces(diagPos[0], diagPos[1])) {
 							isMhoOnPlayer(diagPos[0], diagPos[1]);
 							field[diagPos[0]][diagPos[1]] = new Mho(diagPos[0], diagPos[1]);
-							
-						} else if (mhosCanMoveOnEmptySpaces(carPos[0], carPos[1])) {	
+						}
+						//checks if the mhos could move on an empty space going horizontally/vertically
+						else if (mhosCanMoveOnEmptySpaces(carPos[0], carPos[1])) {	
 							isMhoOnPlayer(carPos[0], carPos[1]);
 							field[carPos[0]][carPos[1]] = new Mho(carPos[0], carPos[1]);
-							
-						} else if (mhosCanMoveOnFences(diagPos[0], diagPos[1])) {
-
-							
-						} else if (mhosCanMoveOnFences(carPos[0], carPos[1])) {
-
+						} 
+						//if the mho can not move onto an empty space and it can not move onto a fence, 
+						//then it stays in the same position
+						else if (!mhosCanMoveOnFences(diagPos[0], diagPos[1])) {
+							field[x][y] = new Mho(x,y);
+						} else if (!mhosCanMoveOnFences(carPos[0], carPos[1])) {
+							field[x][y] = new Mho(x,y);
 						}
-					}}
+					}
 				}
 			}
 		}
 	}
 	
+	/**
+	 * clears the whole board
+	 */
 	public void clear(){
 		for (int x = 0; x < 12; x++) {
 			for (int y = 0; y < 12; y++) {
@@ -202,6 +258,9 @@ public class Grid {
 		}
 	}
 	
+	/**
+	 * updates the mhos on the board
+	 */
 	public void updateMhos(){
 		for (int x = 0; x < 12; x++) {
 			for (int y = 0; y < 12; y++) {
@@ -216,6 +275,10 @@ public class Grid {
 		player.draw(g);
 	}
 	
+	/**
+	 * checks to see if the player has won
+	 * @return
+	 */
 	public boolean checkWin(){
 		int counter = 0;
 		for (int x = 0; x < 12; x++) {

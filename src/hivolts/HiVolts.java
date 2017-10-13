@@ -8,6 +8,11 @@ import java.awt.event.KeyListener;
 import java.awt.image.*;
 import java.net.URL;
 
+/**
+ * The Hivolts class essentially creates the game and the game board. 
+ * It also listens to the keys and updates the game.
+ * @author ameliamao, sophiaVera, ashuBhown
+ */
 @SuppressWarnings("serial")
 public class HiVolts extends Applet implements KeyListener{
 	public static final int windowWidth = 1500;
@@ -19,6 +24,9 @@ public class HiVolts extends Applet implements KeyListener{
 	public Image deadScreen;
 	public Image wonScreen;
 		
+	/**
+	 * This function starts the game, creating the board and all the gimmicks
+	 */
 	public void init(){
 		setSize(windowWidth, windowHeight);
 		this.setBackground(Color.DARK_GRAY);
@@ -33,9 +41,11 @@ public class HiVolts extends Applet implements KeyListener{
 		setFocusable(true);
         setFocusTraversalKeysEnabled(false);
         loadImage();
-        //System.out.println("init completed");
 	}
 	
+	/**
+	 * reset() clears the board and restarts the game
+	 */
 	public static void reset(){
 		gameStatus = true;
 		grid.clear();
@@ -44,10 +54,12 @@ public class HiVolts extends Applet implements KeyListener{
 		grid.changeToRandomPlayerPos();
 	}
 	
+	/**
+	 * draws the board and the images
+	 */
 	@Override
 	public void paint(Graphics g){
 		if(gameStatus){
-			//System.out.println("should be printing when alive and normal");
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, this.getWidth(), this.getHeight());
 			grid.draw(g);
@@ -57,11 +69,15 @@ public class HiVolts extends Applet implements KeyListener{
 		isWon(g);
 	}
 	
+	/**
+	 * this function checks the keys that are pressed 
+	 * and moves the player accordingly
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {	
 		char key = e.getKeyChar();
 		boolean contains = false;
-		for (char c : keys) {
+		for (char c : keys) { //for checks to see if the key pressed is a key that the game uses
 		    if (c == key) {
 		        contains = true; 
 		        break;
@@ -70,53 +86,51 @@ public class HiVolts extends Applet implements KeyListener{
 		if (contains) {
 			grid.field[Grid.player.getX()][Grid.player.getY()] = null;
 			switch (key) {
-			case 'q': 
+			case 'q': //up and left
 				Grid.player.changePosition(-1, -1);
 				break;
-			case 'w':
+			case 'w': //up
 				Grid.player.changePosition(0, -1);
 				break;
-			case 'e':
+			case 'e'://up and right
 				Grid.player.changePosition(1, -1);
 				break;
-			case 'a':
+			case 'a'://left
 				Grid.player.changePosition(-1, 0);
 				break;
-			case 's':
+			case 's'://sit
 				break;
-			case 'd':
+			case 'd'://right
 				Grid.player.changePosition(1, 0);
 				break;
-			case 'z':
+			case 'z'://down and left
 				Grid.player.changePosition(-1, 1);
 				break;
-			case 'x':
+			case 'x'://down
 				Grid.player.changePosition(0, 1);
 				break;
-			case 'c':
+			case 'c'://down and right
 				Grid.player.changePosition(1, 1);
 				break;
-			case 'j':
+			case 'j'://jumps to a random place on the board with no fences
 				grid.changeToRandomPlayerPos();
 				break;
-			case 'u':
+			case 'u': //restarts the game
 				reset();
 				repaint();
 			}
 			int[] pos = {Grid.player.wantedX, Grid.player.wantedY};
+			
+			//checks to see if player is dies from its move
 			if(grid.isPlayerOnFence(pos) || grid.isPlayerOnMho(pos)) {
-				System.out.println("goodbye");
 				gameStatus = false;
 			}
 			else{
 				Grid.player.x = Grid.player.wantedX;
 				Grid.player.y = Grid.player.wantedY;
-				System.out.println("hello");
 				grid.field[Grid.player.x][Grid.player.y] = Grid.player;
-				
-				
 			}
-			if(key != 'j'){
+			if(key != 'j'){ //if key pressed is j, then the mhos do not move
 				grid.moveMhos();
 				grid.updateMhos();
 			}
@@ -124,19 +138,21 @@ public class HiVolts extends Applet implements KeyListener{
 		repaint();
 	}
 	
+	//checks to see if player has died
 	public void isDead(Graphics g){
 		if(!gameStatus){
-			//System.out.println("prints when currently ded");
 			 g.drawImage(deadScreen, 0, 0, this);  
 		}
 	}
 	
+	//checks to see if player won
 	public void isWon(Graphics g){
 		if(grid.checkWin()){
 			g.drawImage(wonScreen, 0, 0, this);
 		}
 	}
 	
+	//gets the instructions, winScreen, and deadScreen images
 	public void loadImage(){
 		helpScreen = getImage(getDocumentBase(), "res/Untitled-1.png");
 		deadScreen = getImage(getDocumentBase(), "res/DeadScreen.png");
@@ -149,5 +165,4 @@ public class HiVolts extends Applet implements KeyListener{
 
 	@Override
 	public void keyTyped(KeyEvent e) {}
-	
 }

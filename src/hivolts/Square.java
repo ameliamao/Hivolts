@@ -6,7 +6,7 @@ import java.awt.*;
 
 /**
  * The Square class is the parent class for Mho, Player, and Fence
- * @author sophiaVera
+ * @author sophiaVera, ameliamao, ashuBhown
  */
 public abstract class Square {
 	int x, y, wantedX, wantedY;
@@ -21,12 +21,11 @@ public abstract class Square {
 	
 	boolean newMho = true; // this is only used inside of mho
 	
-
 	/**
 	 * this function generates a random number between 0 and 10
 	 * @return a random integer
 	 */
-	public static int random2(){
+	public static int random(){
 		Random random = new Random();
 		return random.nextInt(9)+1;
 	}

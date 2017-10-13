@@ -15,8 +15,8 @@ public class Player extends Square {
 	
 	//constructor
 	public Player() {
-			x = random2();
-			y = random2();
+			x = random();
+			y = random();
 			wantedX = x;
 			wantedY = y;
 			dead = false;

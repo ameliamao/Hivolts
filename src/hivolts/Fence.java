@@ -15,8 +15,8 @@ public class Fence extends Square{
 	
 	//random fence coordinates x and y
 	public Fence(){
-		this.x = random2();
-		this.y = random2();
+		this.x = random();
+		this.y = random();
 	}
 	
 	/**
@@ -27,6 +27,4 @@ public class Fence extends Square{
 		g.setColor(this.color);
 		g.fillRect(toCoordinate(x), toCoordinate(y), squareSide, squareSide);
 	}
-
-	
 }
