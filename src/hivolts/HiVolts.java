@@ -33,7 +33,7 @@ public class HiVolts extends Applet implements KeyListener{
 		setFocusable(true);
         setFocusTraversalKeysEnabled(false);
         loadImage();
-        System.out.println("init completed");
+        //System.out.println("init completed");
 	}
 	
 	public static void reset(){
@@ -47,7 +47,7 @@ public class HiVolts extends Applet implements KeyListener{
 	@Override
 	public void paint(Graphics g){
 		if(gameStatus){
-			System.out.println("should be printing when alive and normal");
+			//System.out.println("should be printing when alive and normal");
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, this.getWidth(), this.getHeight());
 			grid.draw(g);
@@ -126,7 +126,7 @@ public class HiVolts extends Applet implements KeyListener{
 	
 	public void isDead(Graphics g){
 		if(!gameStatus){
-			System.out.println("prints when currently ded");
+			//System.out.println("prints when currently ded");
 			 g.drawImage(deadScreen, 0, 0, this);  
 		}
 	}

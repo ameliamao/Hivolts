@@ -5,7 +5,6 @@ import java.awt.Graphics;
 public class Grid {
 	public static Player player; 
 	public Square[][] field = new Square[12][12];
-	public int nuMos = 0;
 	
 	public Grid(){
 		player = new Player();
@@ -116,14 +115,18 @@ public class Grid {
 		return false;
 	}
 	
+	public void isMhoOnPlayer(int x, int y){
+		if(x == player.x && y == player.y){
+			HiVolts.gameStatus = false;
+		}
+	}
+	
 	public void moveMhos(){
 		for (int x = 0; x < 12; x++) {
 			for (int y = 0; y < 12; y++) {
 				if(field[x][y] instanceof Mho){
 					if(!field[x][y].newMho){
 						field[x][y] = null;
-						nuMos+=1;
-						System.out.println(nuMos);
 					if(x == player.getX() && y == player.getY()){
 						player.dead = true;
 						HiVolts.gameStatus = false;
@@ -132,15 +135,19 @@ public class Grid {
 					}
 					else if (x == player.getX()) {
 						if (y < player.y) {
+							isMhoOnPlayer(x, y+1);
 							field[x][y+1] = new Mho(x, y+1);
 						} else {
+							isMhoOnPlayer(x, y-1);
 							field[x][y-1] = new Mho(x, y-1);
 						}
 					}
 					else if (y == player.getY()) {
 						if (x < player.x) {
+							isMhoOnPlayer(x+1, y);
 							field[x+1][y] = new Mho(x+1,y);
 						} else {
+							isMhoOnPlayer(x-1, y);
 							field[x-1][y] = new Mho(x-1, y);
 						}
 					}
@@ -168,14 +175,18 @@ public class Grid {
 						int[] carPos = {x + cardinalDirection[0], y + cardinalDirection[1]};
 						
 						if (mhosCanMoveOnEmptySpaces(diagPos[0], diagPos[1])) {
+							isMhoOnPlayer(diagPos[0], diagPos[1]);
 							field[diagPos[0]][diagPos[1]] = new Mho(diagPos[0], diagPos[1]);
 							
 						} else if (mhosCanMoveOnEmptySpaces(carPos[0], carPos[1])) {	
+							isMhoOnPlayer(carPos[0], carPos[1]);
 							field[carPos[0]][carPos[1]] = new Mho(carPos[0], carPos[1]);
+							
 						} else if (mhosCanMoveOnFences(diagPos[0], diagPos[1])) {
-							field[x][y] = null;
+
+							
 						} else if (mhosCanMoveOnFences(carPos[0], carPos[1])) {
-							field[x][y] = null;
+
 						}
 					}}
 				}
