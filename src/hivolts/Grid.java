@@ -95,15 +95,10 @@ public class Grid {
 		int[] pos = new int[2];
 		pos[0] = Square.random2();
 		pos[1] = Square.random2();
-		while(!isPlayerOnFence(pos)) {
-			pos[0] = Square.random2();
-			pos[1] = Square.random2();
-		}
 		field[player.getX()][player.getY()] = null;
 
-		player.x = pos[0];
-		player.y = pos[1];
-		
+		player.wantedX = pos[0];
+		player.wantedY = pos[1];
 	}
 	public boolean isPlayerOnFence(int[] position) {
 		if (field[position[0]][position[1]] instanceof Fence) {
@@ -126,10 +121,10 @@ public class Grid {
 			for (int y = 0; y < 12; y++) {
 				if(field[x][y] instanceof Mho){
 					if(!field[x][y].newMho){
-					
-					field[x][y] = null;
-					nuMos+=1;
-					System.out.println(nuMos);
+						field[x][y] = null;
+						nuMos+=1;
+						System.out.println(nuMos);
+					}
 					if(x == player.getX() && y == player.getY()){
 						player.dead = true;
 						HiVolts.gameStatus = false;
@@ -139,18 +134,14 @@ public class Grid {
 					else if (x == player.getX()) {
 						if (y < player.y) {
 							field[x][y+1] = new Mho(x, y+1);
-							//y += 1;
 						} else {
 							field[x][y-1] = new Mho(x, y-1);
-							//y -= 1;
 						}
 					}
 					else if (y == player.getY()) {
 						if (x < player.x) {
-							//x += 1;
 							field[x+1][y] = new Mho(x+1,y);
 						} else {
-							//x -= 1;
 							field[x-1][y] = new Mho(x-1, y);
 						}
 					}
@@ -183,26 +174,9 @@ public class Grid {
 						} else if (mhosCanMoveOnEmptySpaces(carPos[0], carPos[1])) {	
 							field[carPos[0]][carPos[1]] = new Mho(carPos[0], carPos[1]);
 						} else if (mhosCanMoveOnFences(diagPos[0], diagPos[1])) {
-							// Move diagonally if landing on a fence
-							//this.x = diagPos[0];
-							//this.y = diagPos[1];
 							field[x][y] = null;
-							
-							//HiVolts.gameStatus = false;
-							//Nothing because its dead???
 						} else if (mhosCanMoveOnFences(carPos[0], carPos[1])) {
 							field[x][y] = null;
-							// Move cardinalDirectionally if landing on a fence
-							//this.x = carPos[0];
-							//this.y = carPos[1];	
-							//this.dead = true;
-							
-							//HiVolts.gameStatus = false;
-							//dead so nothing??
-							//ameria plz look this over,
-							
-							//i hope it works
-						}
 						}
 					}
 				}
@@ -231,5 +205,4 @@ public class Grid {
 		drawField(g);
 		player.draw(g);
 	}
-	
 }
